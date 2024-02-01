@@ -78,10 +78,11 @@ export const login = async (req, res) => {
     }
 
     if (await bcryptjs.compare(password, user.password)) {
-      generateJwtToken(user._id, res);
+      generateJwtToken(user._id, user.username,res);
       return res.status(200).json({
         success: true,
         message: "Login successfull",
+        user
       });
     } else {
       return res.status(400).json({
